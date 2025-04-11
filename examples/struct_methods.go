@@ -1,9 +1,12 @@
 package examples
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+)
 
 type Animal struct {
-	name string
+	name string `help:"the name or type of any animal, as long as it is a cat or dog"`
 }
 
 func (a Animal) speak() string {
@@ -13,6 +16,9 @@ func (a Animal) speak() string {
 	case "dog":
 		return "woof"
 	default:
+		if member, ok := reflect.TypeOf(a).FieldByName("name"); ok {
+			return fmt.Sprintf("Invalid animal name: %s", member.Tag.Get("help"))
+		}
 		return "nondescript animal noise?"
 	}
 }
