@@ -9,4 +9,6 @@ func main() {
 	examples.AnonymousStruct()
 	fmt.Println()
 	examples.StructMethods()
+	fmt.Println()
+	examples.PointerReceiverMethod()
 }
